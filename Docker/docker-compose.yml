@@ -10,7 +10,7 @@ services:
     networks:
       - recruitment-network1
     environment:
-      - MONGO_URI=mongodb://rootuser:rootpassword@mongodb:27017/hr_system?authSource=admin
+      - MONGO_URI=mongodb://rootuser:rootpassword@common:27017/hr_system?authSource=admin
   
   mongodb:
     image: mongo:7
@@ -23,11 +23,13 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=rootuser
       - MONGO_INITDB_ROOT_PASSWORD=rootpassword
   common:
-    image: ubuntu
+    image: nginx
     container_name: common
     networks:
       - recruitment-network1
       - recruitment-network2
+    volumes:
+      - ./nginx.config:/etc/nginx/nginx.config
   
 
 networks:
