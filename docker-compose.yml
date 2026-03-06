@@ -20,13 +20,10 @@ services:
       - "27017:27017"
     networks:
       - recruitment-network
-    volumes:
-      - recruitment-volume:/data/db
     environment:
       - MONGO_INITDB_ROOT_USERNAME=rootuser
       - MONGO_INITDB_ROOT_PASSWORD=rootpassword
   
-volumes:
-  recruitment-volume:
+
 networks:
   recruitment-network:
