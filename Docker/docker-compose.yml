@@ -1,1 +1,39 @@
 
+version: '3.8'
+
+services:
+  recruitment-front:
+    image: suryaa112003/recruitment-app:v1.1.1
+    container_name: recruitment-frontend
+    ports:
+      - "83:3000"
+    networks:
+      - recruitment-network1
+    depends_on:
+      - mongodb
+  
+  mongodb:
+    image: mongo:7
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    networks:
+      - recruitment-network2
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=rootuser
+      - MONGO_INITDB_ROOT_PASSWORD=rootpassword
+  common:
+    image: ubuntu
+    container_name: common
+    ports:
+      - "84:84"
+    environment:
+      - MONGO_URI=mongodb://rootuser:rootpassword@mongodb:27017/hr_system?authSource=admin
+    networks:
+      - recruitment-network1
+      - recruitment-network2
+  
+
+networks:
+  recruitment-network1:
+  recruitment-network2:
