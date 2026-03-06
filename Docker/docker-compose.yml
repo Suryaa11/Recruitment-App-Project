@@ -25,7 +25,6 @@ services:
   common:
     image: nginx
     container_name: common
-    ports: "88:8080"
     networks:
       - recruitment-network1
       - recruitment-network2
