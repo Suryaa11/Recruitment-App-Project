@@ -9,8 +9,8 @@ services:
       - "83:3000"
     networks:
       - recruitment-network1
-    depends_on:
-      - mongodb
+    environment:
+      - MONGO_URI=mongodb://rootuser:rootpassword@mongodb:27017/hr_system?authSource=admin
   
   mongodb:
     image: mongo:7
@@ -25,10 +25,6 @@ services:
   common:
     image: ubuntu
     container_name: common
-    ports:
-      - "84:84"
-    environment:
-      - MONGO_URI=mongodb://rootuser:rootpassword@mongodb:27017/hr_system?authSource=admin
     networks:
       - recruitment-network1
       - recruitment-network2
